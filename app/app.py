@@ -143,8 +143,8 @@ if submitted:
         "EMI_to_Income": float(EMI_to_Income)
     }
     cols = SCHEMA["categorical"] + SCHEMA["numeric"]
-    X = np.array([[payload[c] for c in cols]], dtype=object)
-    proba = float(MODEL.predict_proba(X)[0,1])
+    X_df = pd.DataFrame([payload])[cols]
+    proba = float(MODEL.predict_proba(X_df)[0, 1])
     pred = int(proba >= 0.5)
 
     st.subheader("Result")
